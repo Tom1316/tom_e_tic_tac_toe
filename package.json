@@ -1,0 +1,24 @@
+{
+  "name": "skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "academy.js",
+  "scripts": {
+    "test": "jest",
+    "build": "npx esbuild connectors.ts --bundle --minify --sourcemap=inline --outfile=./build/index.js",
+    "coverage": "npx jest --coverage"
+  },
+  "author": "IWC",
+  "license": "ISC",
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.12",
+    "esbuild": "^0.16.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.5"
+  }
+}
