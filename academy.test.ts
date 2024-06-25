@@ -152,8 +152,6 @@ describe ('This tests the functionality of checkWinner', () => {
         const currentBoard = getBoard() 
         const expectedResult = "cross" 
 
-        console.log(currentBoard)
-
         //Act
         const result = checkWinner(currentBoard)
 
@@ -167,8 +165,6 @@ describe ('This tests the functionality of checkWinner', () => {
         setBoard ([["cross", null, null], ["cross", null, null], ["cross", null, null]])
         const currentBoard = getBoard() 
         const expectedResult = "cross" 
-
-        console.log(currentBoard)
 
         //Act
         const result = checkWinner(currentBoard)
@@ -184,8 +180,6 @@ describe ('This tests the functionality of checkWinner', () => {
         const currentBoard = getBoard() 
         const expectedResult = "cross" 
 
-        console.log(currentBoard)
-
         //Act
         const result = checkWinner(currentBoard)
 
@@ -193,15 +187,47 @@ describe ('This tests the functionality of checkWinner', () => {
         expect(result).toEqual(expectedResult)    
     }) 
 
+    test ('find if there is a winner in anti-diag, top right to bottom left', () => {
 
+        //Arrange
+        setBoard ([[null, null, "cross"], [null, "cross", null], ["cross", null, null]])
+        const currentBoard = getBoard() 
+        const expectedResult = "cross" 
 
+        //Act
+        const result = checkWinner(currentBoard)
 
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    })
+
+    test ("return 'nobody' if the game is completed and there is no winner", () => {
+
+        //Arrange
+        setBoard ([["nought", "cross", "nought"], ["cross", "nought", "cross"], ["cross", "nought", "cross"]])
+        const currentBoard = getBoard() 
+        const expectedResult = "nobody"
+
+        //Act
+        const result = checkWinner(currentBoard)
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    })
+
+    test ("return 'nobody' if the game is completed and there is no winner", () => {
+
+        //Arrange
+        setBoard ([[null, "cross", "nought"], ["cross", "nought", "cross"], ["cross", "nought", "cross"]])
+        const currentBoard = getBoard() 
+        const expectedResult = undefined
+
+        //Act
+        const result = checkWinner(currentBoard)
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    })
 })
-
-
-// test: ...diagonal Top Left - Bottom Right
-// test: ...diagonal Top Right - Bottom Left
-// test: return 'nobody' if the game is completed and there is no winner
-// test: return 'null' if the game is not over and nobody has won
 
 //eof
