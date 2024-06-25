@@ -12,8 +12,8 @@ The jest verbose flag has been set for you in "jest.config.js"
 import { Player, Cell, getBoard, setBoard } from './board'
 import { checkWinner, crossText, getCurrentPlayer, getGameOver, noughtText, resetGame, setCurrentPlayer, switchPlayer, takeTurn } from './academy'
 
-setBoard
-describe ('when using setBoard', () => {
+// Test: setBoard
+describe ('This test ensures setBoard function works by establishing the contents of a 3x3 board', () => {
     beforeEach(() => {
         setBoard([[null, null, null], [null, null, null], [null, null, null]])
         }
@@ -25,23 +25,106 @@ describe ('when using setBoard', () => {
 
 })
 
-// hint: You will need to also use getBoard to test this - so we have done this one for you:
+// Test: getBoard
+describe ('This test ensures getBoard function works by returning the contents of a 3x3 board', () => {
+    beforeEach(() => {
+        setBoard([["cross", "cross", "cross"], [null, null, null], [null, null, null]])
+        }
+    )
+    test ('it should return the above array', () => {
+        const result = getBoard()
+        expect (result).toEqual([["cross", "cross", "cross"], [null, null, null], [null, null, null]])    
+    }) 
 
-//describe: getBoard
-// hint: You will need to also use setBoard to test this in your Arrange step(s)
-// test: it should return the board
-// test: it should return the board whatever state it is in
-// test: it should always be a 3 by 3 grid
+})
 
-//jest.mock(board, connectors)
-// describe: reset game
-// test: if the board has been updated, it should set the board to original state and dimensions
-// test: if the board has not been updated, it should still set the board to original state and dimensions 
+// Test: reset game
+describe ('This tests the functionality of the reset button', () => {
+    beforeEach(() => {
+        setBoard([["cross", "cross", "cross"], [null, null, null], [null, null, null]])
+        }
+    )
+    test ('reset should return a 3x3 array of nulls which is the original game state and board dimensions', () => {
+        //Arrange
+        const expectedResult = [[null, null, null], [null, null, null], [null, null, null]]
 
-// describe: take turn
-// test: if the game is completed, nothing happens and the board is not changed
-// test: if the game is not completed, if the cell is not empty, nothing happens and the board is not changed
-// test: if the game is not completed, if the cell is empty then the counter should be placed in that cell
+        //Act
+        resetGame()
+        const result = getBoard()
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    }) 
+})
+
+// Test: take turn
+describe ('This tests the takeTurn function', () => {
+    beforeEach(() => {
+        setBoard([[null, null, null], [null, null, null], [null, null, null]])
+        }
+    )
+
+    test ('if the game has finished: nothing happens and the board is retunred unchanged', () => {
+        //Arrange
+        setBoard ([["cross", "cross", "cross"], ["cross", "cross", "cross"], ["cross", "cross", "cross"]])
+        const expectedResult = getBoard()
+
+        //Act
+        const result = takeTurn(1,1,true,expectedResult,'nought')
+        console.log(result)
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    }) 
+
+    test ('if the game has not completed: if the cell is not empty, nothing happens and the board is not changed', () => {
+        //Arrange
+        setBoard ([[null, "cross", "cross"], ["cross", "cross", "cross"], ["cross", "cross", "cross"]])
+        const expectedResult = getBoard()
+
+        //Act
+        const result = takeTurn(0, 1, false, expectedResult, 'nought')
+
+        //Asset
+        expect(result).toEqual(expectedResult)
+        
+    })
+
+    test ('if the game has not completed: if the cell is empty then the counter should be placed in that cell', () => {
+        //Arrange
+        setBoard ([[null, "cross", "cross"], ["cross", "cross", "cross"], ["cross", "cross", "cross"]])
+        const currentBoard = getBoard()
+
+        //Act
+        const result = takeTurn(0, 0, false, currentBoard, 'nought')
+        const expectedResult = getBoard()
+
+        //Asset
+        expect(result).toEqual(expectedResult)
+        
+    })
+})
+
+// Test: switch player 
+describe ('This tests the functionality of switchPlayer', () => {
+    beforeEach(() => {
+        setBoard([[null, null, null], [null, null, null], [null, null, null]])
+        }
+    )
+    test ('it should switch the players only if the turn was completed', () => {
+        //Arrange
+        const expectedResult = [[null, null, null], [null, null, null], [null, null, null]]
+
+        //Act
+        resetGame()
+        const result = getBoard()
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    }) 
+})
+
+
 // test: it should switch the players only if the turn was completed
 
 // describe: check winner
