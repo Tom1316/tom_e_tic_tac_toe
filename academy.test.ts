@@ -126,15 +126,15 @@ describe ('This tests the functionality of switchPlayer', () => {
 })
 
 // Test: Check winner
-
 describe ('This tests the functionality of checkWinner', () => {
     beforeEach(() => {
-        setBoard([["cross", "cross", "cross"], [null, null, null], [null, null, null]])
+        setBoard([[null, null, null], [null, null, null], [null, null, null]])
         }
     )
     test ('if there is a winner, return the name of the winner', () => {
 
         //Arrange
+        setBoard ([["cross", "cross", "cross"], [null, null, null], [null, null, null]])
         const currentBoard = getBoard() 
         const expectedResult = "cross" 
 
@@ -144,10 +144,61 @@ describe ('This tests the functionality of checkWinner', () => {
         //Assert
         expect(result).toEqual(expectedResult)    
     }) 
+
+    test ('find if there is a winner in horizontal, row 1 or 2 or 3', () => {
+
+        //Arrange
+        setBoard ([["cross", null, null], ["cross", null, null], ["cross", null, null]])
+        const currentBoard = getBoard() 
+        const expectedResult = "cross" 
+
+        console.log(currentBoard)
+
+        //Act
+        const result = checkWinner(currentBoard)
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    }) 
+
+    test ('find if there is a winner in verticle, row 1 or 2 or 3', () => {
+
+        //Arrange
+        setBoard ([["cross", null, null], ["cross", null, null], ["cross", null, null]])
+        const currentBoard = getBoard() 
+        const expectedResult = "cross" 
+
+        console.log(currentBoard)
+
+        //Act
+        const result = checkWinner(currentBoard)
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    }) 
+
+    test ('find if there is a winner in diag, top left to bottom right', () => {
+
+        //Arrange
+        setBoard ([["cross", null, null], [null, "cross", null], [null, null, "cross"]])
+        const currentBoard = getBoard() 
+        const expectedResult = "cross" 
+
+        console.log(currentBoard)
+
+        //Act
+        const result = checkWinner(currentBoard)
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    }) 
+
+
+
+
 })
-// if there is a winner, return the name of the winner
-// test: ...horizontal, row 1 or 2 or 3
-// test: ...vertical, column 1 or 2 or 3
+
+
 // test: ...diagonal Top Left - Bottom Right
 // test: ...diagonal Top Right - Bottom Left
 // test: return 'nobody' if the game is completed and there is no winner
