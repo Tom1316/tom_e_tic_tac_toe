@@ -113,22 +113,39 @@ describe ('This tests the functionality of switchPlayer', () => {
     )
     test ('it should switch the players only if the turn was completed', () => {
         //Arrange
-        const expectedResult = [[null, null, null], [null, null, null], [null, null, null]]
+        setCurrentPlayer ("cross")
+        const currentPlayer = getCurrentPlayer()
+        const expectedResult = "nought"
 
         //Act
-        resetGame()
-        const result = getBoard()
+        const result = switchPlayer(currentPlayer)
 
         //Assert
         expect(result).toEqual(expectedResult)    
     }) 
 })
 
+// Test: Check winner
 
-// test: it should switch the players only if the turn was completed
+describe ('This tests the functionality of checkWinner', () => {
+    beforeEach(() => {
+        setBoard([["cross", "cross", "cross"], [null, null, null], [null, null, null]])
+        }
+    )
+    test ('if there is a winner, return the name of the winner', () => {
 
-// describe: check winner
-// test: if there is a winner, return the name of the winner
+        //Arrange
+        const currentBoard = getBoard() 
+        const expectedResult = "cross" 
+
+        //Act
+        const result = checkWinner(currentBoard)
+
+        //Assert
+        expect(result).toEqual(expectedResult)    
+    }) 
+})
+// if there is a winner, return the name of the winner
 // test: ...horizontal, row 1 or 2 or 3
 // test: ...vertical, column 1 or 2 or 3
 // test: ...diagonal Top Left - Bottom Right
